@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Controllers
 {
@@ -25,11 +26,17 @@ namespace API.Controllers
             return await _context.Users.ToListAsync();    
         }
         
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUserByIdAsync(int id) 
         {
             return await _context.Users.FindAsync(id); 
         }
+
+        // [HttpPost("add-photo")]
+        // public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
+        // {
+
+        // }
     }
 }
