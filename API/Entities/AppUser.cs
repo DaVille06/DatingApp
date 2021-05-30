@@ -22,9 +22,11 @@ namespace API.Entities
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
 
-        public int GetAge()
-        {
-            return DateOfBirth.CalculateAge();
-        }
+        // this is causing inefficiency with automapper
+        // commenting this out for now
+        // public int GetAge()
+        // {
+        //     return DateOfBirth.CalculateAge();
+        // }
     }
 }

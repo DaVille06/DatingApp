@@ -7,30 +7,45 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using API.Interfaces;
+using API.DTOs;
+using AutoMapper;
 
 namespace API.Controllers
 {
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UsersController(DataContext context)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            _context = context;
+            _mapper = mapper;
+            _userRepository = userRepository;
         }
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsersAsync() 
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsersAsync()
         {
-            return await _context.Users.ToListAsync();    
+            // var users = await _userRepository.GetUsersAsync();
+            // var usersToReturn = _mapper.Map<IEnumerable<MemberDTO>>(users);
+
+
+            // return Ok(usersToReturn);
+
+            var users = await _userRepository.GetMembersAsync();
+            return Ok(users);
         }
-        
+
         [AllowAnonymous]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUserByIdAsync(int id) 
+        [HttpGet("{username}")]
+        public async Task<ActionResult<MemberDTO>> GetUserAsync(string username)
         {
-            return await _context.Users.FindAsync(id); 
+            // var user = await _userRepository.GetUserByUsernameAsync(username);
+            // return _mapper.Map<MemberDTO>(user);
+
+            return await _userRepository.GetMemberAsync (username);
         }
 
         // [HttpPost("add-photo")]
