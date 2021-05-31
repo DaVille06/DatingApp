@@ -1,4 +1,3 @@
-using API.Photos;
 using API.Data;
 using API.Interfaces;
 using API.Services;

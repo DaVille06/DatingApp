@@ -3,8 +3,8 @@ using API.Interfaces;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using API.Photos;
 using CloudinaryDotNet;
+using API.Helpers;
 
 namespace API.Services
 {

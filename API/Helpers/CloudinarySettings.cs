@@ -1,4 +1,4 @@
-namespace API.Photos
+namespace API.Helpers
 {
     public class CloudinarySettings
     {
